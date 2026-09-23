@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="quietline_trigger_label">Quietline emergency trigger</string>
+    <string name="quietline_trigger_description">Lets Quietline start an audio recording when you press the volume-down button in a set pattern. Quietline only watches the volume-down button. It does not read your screen, what you type, or other apps.</string>
+</resources>

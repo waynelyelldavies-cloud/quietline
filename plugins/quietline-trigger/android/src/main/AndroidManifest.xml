@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application>
+
+        <!-- Listens for the volume-down pattern. User must switch it on in Accessibility settings. -->
+        <service
+            android:name="com.myfixxer.quietline.trigger.VolumeTriggerService"
+            android:exported="true"
+            android:label="@string/quietline_trigger_label"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/quietline_trigger_config" />
+        </service>
+
+        <!-- Does the actual audio recording, as a microphone foreground service. -->
+        <service
+            android:name="com.myfixxer.quietline.trigger.RecordingService"
+            android:exported="false"
+            android:foregroundServiceType="microphone" />
+
+        <provider
+            android:name="com.myfixxer.quietline.trigger.RecordingsFileProvider"
+            android:authorities="${applicationId}.quietline.files"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/quietline_file_paths" />
+        </provider>
+    </application>
+</manifest>
