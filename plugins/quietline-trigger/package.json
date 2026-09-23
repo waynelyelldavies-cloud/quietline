@@ -1,0 +1,14 @@
+{
+  "name": "quietline-trigger",
+  "version": "0.1.0",
+  "description": "Volume-button emergency recording trigger (Android native plugin for Quietline)",
+  "private": true,
+  "capacitor": {
+    "android": {
+      "src": "android"
+    }
+  },
+  "peerDependencies": {
+    "@capacitor/core": "^7.0.0"
+  }
+}
